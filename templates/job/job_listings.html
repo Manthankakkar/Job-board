@@ -1,0 +1,27 @@
+{% extends 'job/base.html' %}
+{% block content %}
+
+<h1>Available Jobs</h1>
+{% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+<ul>
+    {% for job in jobs %}
+        <li>
+            <strong>{{ job.title }}</strong> at {{ job.company }}<br>
+            <p>{{ job.description }}</p>
+            <form method="POST" action="{% url 'apply_job' job.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="resume" required>
+                <button type="submit">Apply</button>
+            </form>
+        </li>
+    {% empty %}
+        <li>No jobs available.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

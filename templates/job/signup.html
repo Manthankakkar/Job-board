@@ -1,0 +1,14 @@
+{% extends 'job/base.html' %}
+{% block content %}
+
+        <h1>this is a signup form.</h1>
+        <h2> please fill your details</h2>
+        <form method="POST">
+            {%csrf_token%}
+            {{userform.as_p}}
+            {{profileform.as_p}}
+            <button type="submit"> Register</button>
+
+        </form>
+   
+{% endblock %}
